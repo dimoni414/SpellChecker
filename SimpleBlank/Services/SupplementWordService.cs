@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace SimpleBlank.Services
 {
-    public class SupplementWordService : BaseDictionary
+    public class SupplementWordService
     {
         public List<string> Supplement(string inputWord)
         {
-            var supplementWords = from word in _dictionary
-                                  where word.Key.Contains(inputWord.ToLower()П)
+            var supplementWords = from word in BaseDictionary.dictionary
+                                  where word.Key.Contains(inputWord.ToLower())
                                   where word.Key.Length > inputWord.Length
                                   orderby word.Value descending
                                   select word.Key;

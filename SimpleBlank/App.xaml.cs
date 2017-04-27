@@ -14,7 +14,7 @@ namespace SimpleBlank
         {
             var window = new MainWindow()
             {
-                DataContext = new MainViewModel(new RelayCommandFactory(),new SupplementWordService(),new SpellCheckerService())
+                DataContext = new MainViewModel(new RelayCommandFactory(),new SupplementWordService(),new SpellCheckerService(), new LearningDictionaryService())
                 {
                     
                 }
@@ -22,6 +22,11 @@ namespace SimpleBlank
 
             window.Show();
             base.OnStartup(e);
+        }
+        protected override void OnExit(ExitEventArgs e)
+        {
+            BaseDictionary.SerializeDictionary();
+            base.OnExit(e);
         }
     }
 }

@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleBlank", "SimpleBlank\SimpleBlank.csproj", "{6429FBC0-2755-4113-A280-4A40B003E8E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning Dictionary", "Learning Dictionary\Learning Dictionary.csproj", "{ECB1450F-7844-40CB-8EE6-B33594EC195F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,18 +27,6 @@ Global
 		{6429FBC0-2755-4113-A280-4A40B003E8E5}.Release|x64.Build.0 = Release|Any CPU
 		{6429FBC0-2755-4113-A280-4A40B003E8E5}.Release|x86.ActiveCfg = Release|Any CPU
 		{6429FBC0-2755-4113-A280-4A40B003E8E5}.Release|x86.Build.0 = Release|Any CPU
-		{ECB1450F-7844-40CB-8EE6-B33594EC195F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ECB1450F-7844-40CB-8EE6-B33594EC195F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ECB1450F-7844-40CB-8EE6-B33594EC195F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{ECB1450F-7844-40CB-8EE6-B33594EC195F}.Debug|x64.Build.0 = Debug|Any CPU
-		{ECB1450F-7844-40CB-8EE6-B33594EC195F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{ECB1450F-7844-40CB-8EE6-B33594EC195F}.Debug|x86.Build.0 = Debug|Any CPU
-		{ECB1450F-7844-40CB-8EE6-B33594EC195F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ECB1450F-7844-40CB-8EE6-B33594EC195F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ECB1450F-7844-40CB-8EE6-B33594EC195F}.Release|x64.ActiveCfg = Release|Any CPU
-		{ECB1450F-7844-40CB-8EE6-B33594EC195F}.Release|x64.Build.0 = Release|Any CPU
-		{ECB1450F-7844-40CB-8EE6-B33594EC195F}.Release|x86.ActiveCfg = Release|Any CPU
-		{ECB1450F-7844-40CB-8EE6-B33594EC195F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

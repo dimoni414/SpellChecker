@@ -6,31 +6,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace SimpleBlank.Services
 {
-    public class SpellCheckerService:BaseDictionary
+    public class SpellCheckerService
 
     {
-        public SpellCheckerService()
-        {
-            _dictionary = LoadDictionary();
-        }
-
-        private Dictionary<string, int> LoadDictionary()
-        {
-            var loader = new BinaryFormatter();
-            using (var fstream = new FileStream("sortedDictionary.data"
-                                                        , FileMode.Open, FileAccess.Read))
-            {
-                var loadingArray = loader.Deserialize(fstream) as Array;
-                var result = new Dictionary<string, int>(loadingArray.Length);
-                foreach (string word in loadingArray)
-                {
-                    result.Add(word, 1);
-                }
-                return result;
-            }
-        }
-
-        //public IReadOnlyList<string> SpellChecking()
+           //public IReadOnlyList<string> SpellChecking()
         //{
         //    Spelling spelling = new Spelling();
         //    string word = "";
@@ -67,7 +46,7 @@ namespace SimpleBlank.Services
             word = word.ToLower();
 
             // known()
-            if (_dictionary.ContainsKey(word))
+            if (BaseDictionary.dictionary.ContainsKey(word))
                 return word;
 
             List<String> list = Edits(word);
@@ -75,8 +54,8 @@ namespace SimpleBlank.Services
 
             foreach (string wordVariation in list)
             {
-                if (_dictionary.ContainsKey(wordVariation) && !candidates.ContainsKey(wordVariation))
-                    candidates.Add(wordVariation, _dictionary[wordVariation]);
+                if (BaseDictionary.dictionary.ContainsKey(wordVariation) && !candidates.ContainsKey(wordVariation))
+                    candidates.Add(wordVariation, BaseDictionary.dictionary[wordVariation]);
             }
 
             if (candidates.Count > 0)
@@ -87,8 +66,8 @@ namespace SimpleBlank.Services
             {
                 foreach (string wordVariation in Edits(item))
                 {
-                    if (_dictionary.ContainsKey(wordVariation) && !candidates.ContainsKey(wordVariation))
-                        candidates.Add(wordVariation, _dictionary[wordVariation]);
+                    if (BaseDictionary.dictionary.ContainsKey(wordVariation) && !candidates.ContainsKey(wordVariation))
+                        candidates.Add(wordVariation, BaseDictionary.dictionary[wordVariation]);
                 }
             }
 

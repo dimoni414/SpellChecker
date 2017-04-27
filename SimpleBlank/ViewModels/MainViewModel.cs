@@ -43,7 +43,7 @@ namespace ViewModels
 
         #region Commands
 
-        public ICommand BlankCommand { get; set; }
+        public ICommand LearnDictionaryCommand { get; set; }
 
         #endregion Commands
 
@@ -51,11 +51,13 @@ namespace ViewModels
 
         public MainViewModel(RelayCommandFactory commandFactory
                            , SupplementWordService supplementWordService
-                           , SpellCheckerService spellCheckerService)
+                           , SpellCheckerService spellCheckerService
+            ,LearningDictionaryService learningDictionaryService)
         {
             _supplementWordService = supplementWordService;
             _spellCheckerService = spellCheckerService;
-            BlankCommand = commandFactory.CreateCommand(OnBlank);
+            _learningDictionaryService = learningDictionaryService;
+            LearnDictionaryCommand = commandFactory.CreateCommand(_learningDictionaryService.LearnByBook);
         }
 
         #endregion Constructor
@@ -71,10 +73,7 @@ namespace ViewModels
             RaisePropertyChanged(nameof(ListSupplements));
         }
 
-        private void OnBlank()
-        {
-            throw new NotImplementedException();
-        }
+
 
         #endregion Methods
 
@@ -83,6 +82,7 @@ namespace ViewModels
         private string _inputingText;
         private SupplementWordService _supplementWordService;
         private SpellCheckerService _spellCheckerService;
+        private LearningDictionaryService _learningDictionaryService;
 
         #endregion Fields
     }
