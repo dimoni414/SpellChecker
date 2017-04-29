@@ -4,7 +4,7 @@ using System.Windows.Interactivity;
 
 namespace SimpleBlank.Behaviour
 {
-    public class LastWordBehaviour : Behavior<UIElement>
+    public class LastWordBehaviour : Behavior<TextBox>
     {
         public static readonly DependencyProperty CaretIndexerProperty
             = DependencyProperty.Register(
@@ -19,7 +19,26 @@ namespace SimpleBlank.Behaviour
             set { SetValue(CaretIndexerProperty, value); }
         }
 
-     
+
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+
+            AssociatedObject.TextChanged += OnTextChanged;
+        }
+
+        protected override void OnDetaching()
+        {
+            base.OnDetaching();
+
+            AssociatedObject.TextChanged -= OnTextChanged;
+        }
+
+        private void OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            CaretIndexer = AssociatedObject.CaretIndex;
+        }
+
     }
 }
 

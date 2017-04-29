@@ -1,11 +1,10 @@
 ﻿using Mvvm.Core.Services;
 using Mvvm.Core.ViewModels;
 using SimpleBlank.Services;
-using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Interactivity;
 
 namespace ViewModels
 {
@@ -13,29 +12,33 @@ namespace ViewModels
     {
         #region Propertys
 
-        //public static readonly DependencyProperty CaretIndexerProperty
-        //    = DependencyProperty.Register(
-        //        "CaretIndexer",
-        //        typeof(int),
-        //        typeof(MainViewModel),
-        //        new UIPropertyMetadata(null));
-
-        //public int CaretIndexer
-        //{
-        //    get { return (int)GetValue(CaretIndexerProperty); }
-        //    set { SetValue(CaretIndexerProperty, value); }
-        //}
+        public int CaretIndex
+        {
+            get { return _caretIndex; }
+            set
+            {
+                UpdateValue(value, ref _caretIndex);
+                SupplementWord(_supplementWordService.GetCurrentWord(_inputingText, _caretIndex));
+            }
+        }
 
         public string InputingText
         {
             get { return _inputingText; }
+            set { UpdateValue(value, ref _inputingText); }
+        }
+
+        public string GoodSupplementWord
+        {
+            get { return _goodSupplementWord; }
             set
             {
-                UpdateValue(value, ref _inputingText);
-                SupplementWord(_inputingText);
+                _supplementWordService.ReplaceSupplamentWord(this, value);
+                MessageBox.Show("!!!!!");
+                ListSupplements.Clear();
+                
             }
         }
-       
 
         public List<string> ListSupplements { get; set; }
 
@@ -52,7 +55,7 @@ namespace ViewModels
         public MainViewModel(RelayCommandFactory commandFactory
                            , SupplementWordService supplementWordService
                            , SpellCheckerService spellCheckerService
-            ,LearningDictionaryService learningDictionaryService)
+            , LearningDictionaryService learningDictionaryService)
         {
             _supplementWordService = supplementWordService;
             _spellCheckerService = spellCheckerService;
@@ -64,16 +67,14 @@ namespace ViewModels
 
         #region Methods
 
-        private void SupplementWord(string _inputingText)
+        private void SupplementWord(string word)
         {
-            var last = _inputingText.LastIndexOf(' ')+1;
-            var length = _inputingText.Length - last;
-            var lastWord = _inputingText.Substring(last,length);
-            ListSupplements = _supplementWordService.Supplement(lastWord);
+            //var last = _inputingText.LastIndexOf(' ') + 1;
+            //var length = _inputingText.Length - last;
+            //var lastWord = _inputingText.Substring(last, length);
+            ListSupplements = _supplementWordService.Supplement(word);
             RaisePropertyChanged(nameof(ListSupplements));
         }
-
-
 
         #endregion Methods
 
@@ -83,6 +84,8 @@ namespace ViewModels
         private SupplementWordService _supplementWordService;
         private SpellCheckerService _spellCheckerService;
         private LearningDictionaryService _learningDictionaryService;
+        private int _caretIndex;
+        private string _goodSupplementWord;
 
         #endregion Fields
     }

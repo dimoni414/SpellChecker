@@ -3,13 +3,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:behaviours="clr-namespace:SimpleBlank.Behaviour"
-    xmlns:services="clr-namespace:SimpleBlank.Services"
-    
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:local="clr-namespace:SimpleBlank"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:services="clr-namespace:SimpleBlank.Services"
     Title="MainWindow"
     Width="525"
     Height="350"
@@ -31,13 +30,27 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition />
+                <RowDefinition Height="35" />
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <DockPanel Grid.Row="0" >
-                <Button Content="Обучить словарь!" Command="{Binding LearnDictionaryCommand}"></Button>
+            <DockPanel Grid.Row="0">
+                <Button Command="{Binding LearnDictionaryCommand}" Content="Обучить словарь!" />
             </DockPanel>
-            <Grid Row="1">
+
+            <ListBox
+                Grid.Row="1"
+                ItemsSource="{Binding ListSupplements}"
+                TextBlock.FontSize="18"
+                SelectedItem="{Binding Path=GoodSupplementWord}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+
+            <Grid Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -45,14 +58,14 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox
-                   Name="InputingTextBox"
+                    Name="InputingTextBox"
                     Grid.Column="0"
-                    Text="{ Binding InputingText, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding InputingText, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
-                        <behaviours:LastWordBehaviour CaretIndexer="{Binding ElementName=InputingTextBox,Path=CaretIndex}"></behaviours:LastWordBehaviour>
+                        <behaviours:LastWordBehaviour CaretIndexer="{Binding CaretIndex,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                     </i:Interaction.Behaviors>
                 </TextBox>
-                <ListBox Grid.Column="1" ItemsSource="{Binding ListSupplements}" />
+                <ListBox Grid.Column="1" ItemsSource="{Binding BadWords}" />
             </Grid>
         </Grid>
     </Window.Content>
